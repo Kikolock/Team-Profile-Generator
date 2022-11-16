@@ -1,0 +1,44 @@
+/* the style.css sheet is stored in the /src directory and copied to /dist when the app is run. I use Bootstrap for the layout and general styling
+and then this sheet applies any final changes. While there are no media queries here, using Bootstrap, the site looked responsive when I tested different
+resolutions in Chrome.*/
+
+body {
+    background-color: lightgray;
+}
+
+.banner {
+    background-color: lightskyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+h1 {
+    font-size: 48px;
+}
+
+.card-wrapper {
+    margin: 75px;
+}
+
+.employee-card {
+    margin: 15px;
+    border-style: solid;
+    border-color: black;
+}
+
+.card-header {
+    background-color: lightskyblue;
+}
+
+.manager {
+    background-color: lightgoldenrodyellow;
+}
+
+.label {
+    font-weight: bold;
+}
