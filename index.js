@@ -5,185 +5,40 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const generateHTML = require('./src/generateHTML');
 const { writeToFile, copyStyle } = require('./utils/createPage');
+const { managerQuestions, engineerQuestions , internQuestions } = require('./questions');
 
 //employees is a global array that is used to store the employee objects as they are created.
 let employees = [];
 
 //this function adds the team manger object. it prompts the user for input and returns the provided answers.
 const addManager = () => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: "What is the team manager's name?",
-            validate: nameInput => {
-                if(nameInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the team manager's name!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'number',
-            name: 'id',
-            message: "What is the team manager's ID?", 
-            validate: idInput => {
-                if(idInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the team manager's ID!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "What is the team manager's email address?",
-            validate: emailInput => {
-                if(emailInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the team manager's email!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'number',
-            name: 'officeNum',
-            message: "What is the team manager's office number?",
-            validate: officeInput => {
-                if(officeInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the team manager's office number!");
-                    return false;
-                }
-            }
-        }
-    ]);
+    return inquirer.prompt(managerQuestions);
 }
 
 //if the user chooses to add an engineer from the main menu, this function is called and the user is prompted with engineer appropriate questions.
 const addEngineer = () => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: "What is the engineer's name?",
-            validate: nameInput => {
-                if(nameInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the engineer's name!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'number',
-            name: 'id',
-            message: "What is the engineer's ID?",
-            validate: idInput => {
-                if(idInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the engineer's ID!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "What is the engineer's email address?",
-            validate: emailInput => {
-                if(emailInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the engineer's email!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'github',
-            message: "What is the engineer's Github username?",
-            validate: githubInput => {
-                if(githubInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the engineer's Github username!");
-                    return false;
-                }
-            }
-        }
-    ])
+    return inquirer.prompt(engineerQuestions)
     
 }
 
 //if the user chooses to add an intern from the main menu, this function is called and the user is prompted with intern appropriate questions.
 const addIntern = () => {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: "What is the intern's name?",
-            validate: nameInput => {
-                if(nameInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the intern's name!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'number',
-            name: 'id',
-            message: "What is the intern's ID?",
-            validate: idInput => {
-                if(idInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the intern's ID!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "What is the intern's email address?",
-            validate: emailInput => {
-                if(emailInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the intern's email!");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'school',
-            message: "What is the intern's school?",
-            validate: schoolInput => {
-                if(schoolInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the intern's school!");
-                    return false;
-                }
-            }
-        }
-    ]);
+    return inquirer.prompt(internQuestions);
    
 }
+
+// function addEmployee(parameter) { 
+//     switch (key) {
+//         case 'manager':
+//             return inquirer.prompt(managerQuestions);
+//         case 'engineer':
+//             return inquirer.prompt(engineerQuestions)
+//         case 'intern':
+//              return inquirer.prompt(internQuestions);
+//         default:
+//             break;
+//     }
+//  }
 
 //this function is called to display the main menu where the user selects to add an engineer, add an intern, or finish. when a choice is made, the appropriate
 //function is called, the answers that are returned are then pushed to the employees array and then the displayMenu function is recursively called. if the finished
