@@ -5,6 +5,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const generateHTML = require('./src/generateHTML');
 const { writeToFile, copyStyle } = require('./utils/createPage');
+//another file was created to store questions for employees
 const { managerQuestions, engineerQuestions , internQuestions } = require('./questions');
 
 //employees is a global array that is used to store the employee objects as they are created.
@@ -15,30 +16,17 @@ const addManager = () => {
     return inquirer.prompt(managerQuestions);
 }
 
-//if the user chooses to add an engineer from the main menu, this function is called and the user is prompted with engineer appropriate questions.
-const addEngineer = () => {
-    return inquirer.prompt(engineerQuestions)
-    
-}
-
-//if the user chooses to add an intern from the main menu, this function is called and the user is prompted with intern appropriate questions.
-const addIntern = () => {
-    return inquirer.prompt(internQuestions);
-   
-}
-
-// function addEmployee(parameter) { 
-//     switch (key) {
-//         case 'manager':
-//             return inquirer.prompt(managerQuestions);
-//         case 'engineer':
-//             return inquirer.prompt(engineerQuestions)
-//         case 'intern':
-//              return inquirer.prompt(internQuestions);
-//         default:
-//             break;
-//     }
-//  }
+//this switch function makes the code cleaner, user is prompted with appropriate questions for Engineer and Intern.
+function addEmployee(employeeTypeChoice) { 
+    switch (employeeTypeChoice) {
+        case 'engineer':
+            return inquirer.prompt(engineerQuestions)
+        case 'intern':
+             return inquirer.prompt(internQuestions);
+        default:
+            break;
+    }
+ }
 
 //this function is called to display the main menu where the user selects to add an engineer, add an intern, or finish. when a choice is made, the appropriate
 //function is called, the answers that are returned are then pushed to the employees array and then the displayMenu function is recursively called. if the finished
@@ -55,7 +43,8 @@ const displayMenu = () => {
         ).then(menuChoice => {
         
             if(menuChoice.choice === 'Add an Engineer'){
-                addEngineer()
+                //this function is calling the switch statement
+                addEmployee('engineer')
                 .then(engInfo => {
                     const engineer = new Engineer(engInfo.name, engInfo.id, engInfo.email, engInfo.github);
                     employees.push(engineer);
@@ -63,7 +52,8 @@ const displayMenu = () => {
             
                 })
             } else if (menuChoice.choice === 'Add an Intern') {
-                addIntern()
+                //this function is calling the switch statement
+                addEmployee('intern')
                 .then(intInfo => {
                     const intern = new Intern(intInfo.name, intInfo.id, intInfo.email, intInfo.school);
                     employees.push(intern);
